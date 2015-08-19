@@ -18,7 +18,10 @@ generatePalindromes x = (catMaybes
 generateCandidates :: String -> [String]
 generateCandidates x = (map T.unpack
 					     (map 
-					   	   (\l -> substring l $ T.pack x) [[i,j] | i<- [0.. length x], j<-[i..(length x) - 1]]))
+					   	   (\l -> substring l $ T.pack x) (substrings x)))
+
+substrings :: String -> [[Int]]
+substrings x = [[i,j] | i<- [0.. length x], j<-[i..(length x) - 1]]
 
 substring :: [Int] -> T.Text -> T.Text
 substring [start, end] text =  T.take (end - start + 1 ) $ T.drop start $ text

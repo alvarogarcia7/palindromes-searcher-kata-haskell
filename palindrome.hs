@@ -8,7 +8,7 @@ palindrome x = if x == (reverse x)
 			   else Nothing
 
 countPalindromes :: String -> Int
-countPalindromes x = (length (generatePalindromes x)) -1 + (length x)
+countPalindromes x = length (generatePalindromes x)
 
 generatePalindromes :: String -> [String]
 generatePalindromes x = (catMaybes 
@@ -16,9 +16,13 @@ generatePalindromes x = (catMaybes
 					   	 (generateCandidates x)))
 
 generateCandidates :: String -> [String]
-generateCandidates x = (map T.unpack 
-					   	   (T.tails 
-					   	   	 (T.pack x)))
+generateCandidates x = (map T.unpack
+					     (map 
+					   	   (\l -> substring l $ T.pack x) [[i,j] | i<- [0.. length x], j<-[i..(length x) - 1]]))
+
+substring :: [Int] -> T.Text -> T.Text
+substring [start, end] text =  T.take (end - start + 1 ) $ T.drop start $ text
+
 
 
 -- map palindrome (map T.unpack (T.tails (T.pack "12345")))

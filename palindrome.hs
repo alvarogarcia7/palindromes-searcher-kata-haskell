@@ -21,7 +21,7 @@ generateCandidates x = (map T.unpack
 		(\l -> substring l $ T.pack x) (substringIndices x)))
 
 substringIndices :: String -> [[Int]]
-substringIndices x = [[i,j] | i<- [0.. length x], j<-[i..(length x) - 1]]
+substringIndices x = [[i,j] | i <- [0..length x], j <- [i..(length x) - 1]]
 
 substring :: [Int] -> T.Text -> T.Text
 substring [start, end] text =  T.take (end - start + 1 ) $ T.drop start $ text

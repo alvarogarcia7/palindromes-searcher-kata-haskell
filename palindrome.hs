@@ -11,14 +11,14 @@ countPalindromes :: String -> Int
 countPalindromes x = length (generatePalindromes x)
 
 generatePalindromes :: String -> [String]
-generatePalindromes x = (catMaybes 
-					   (map palindrome 
-					   	 (generateCandidates x)))
+generatePalindromes x = (catMaybes
+	(map palindrome 
+		(generateCandidates x)))
 
 generateCandidates :: String -> [String]
 generateCandidates x = (map T.unpack
-					     (map 
-					   	   (\l -> substring l $ T.pack x) (substringIndices x)))
+	(map
+		(\l -> substring l $ T.pack x) (substringIndices x)))
 
 substringIndices :: String -> [[Int]]
 substringIndices x = [[i,j] | i<- [0.. length x], j<-[i..(length x) - 1]]
